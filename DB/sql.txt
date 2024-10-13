@@ -1,0 +1,32 @@
+-- 데이터베이스 생성
+create database ytmembership;
+
+-- 데이터베이스 조회
+show database;
+
+-- 데이터베이스 삭제
+drop database ytmembership;
+
+-- 데이터베이스 사용
+use ytmembership;
+
+-- member
+
+create table member (
+	idx int(11) unsigned not null auto_increment,
+	id varchar(100) default '',
+	name varchar(100) default '',
+	email varchar(100) default '',
+	password varchar(100) default '',
+	zipcode char(5) default '',
+	addr1 varchar(255) default '',
+	addr2 varchar(255) default '',
+	photo varchar(100) default '',
+	create_at datetime,
+	ip varchar(20) default '',
+	primary key(idx),
+	unique index id(id) using btree
+);
+
+-- 테이블 조회
+show tables;
