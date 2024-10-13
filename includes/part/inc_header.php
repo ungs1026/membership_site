@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?= $g_title ?></title>
+	<title><?= (isset($g_title) && $g_title != '' ? $g_title : '네카라쿠배') ?></title>
 
 	<!-- Bootstrap CSS JS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -35,10 +35,10 @@
 			</a>
 
 			<ul class="nav nav-pills">
-				<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">회사소개</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">회원가입</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">게시판</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">로그인</a></li>
+				<li class="nav-item"><a href="index.php" class="nav-link <?= ($menu_code == '') ? "active":'' ?>">Home</a></li>
+				<li class="nav-item"><a href="company.php" class="nav-link <?= ($menu_code == 'company') ? "active":'' ?>">회사소개</a></li>
+				<li class="nav-item"><a href="stipulation.php" class="nav-link <?= ($menu_code == 'member') ? "active":'' ?>">회원가입</a></li>
+				<li class="nav-item"><a href="board.php" class="nav-link <?= ($menu_code == 'board') ? "active":'' ?>">게시판</a></li>
+				<li class="nav-item"><a href="login.php" class="nav-link <?= ($menu_code == 'login') ? "active":'' ?>">로그인</a></li>
 			</ul>
 		</header>

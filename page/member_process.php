@@ -33,6 +33,11 @@ if ($mode == 'id_chk') {
 		die(json_encode(['result' => 'empty_email']));
 	}
 
+	// 이메일 형식 체크
+	if ($mem->email_format_check($email) === false) {
+		die(json_encode(['result' => 'email_format_wrong']));
+	}
+
 	if ($mem->email_exists($email)) {
 		die(json_encode(['result' => 'fail']));
 	} else {
@@ -70,4 +75,11 @@ if ($mode == 'id_chk') {
 	];
 
 	$mem->input($arr);
+
+	echo "
+	<script>
+		self.location.href= '../member_success.php';
+	</script>
+	";
 }
+?>

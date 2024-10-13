@@ -22,6 +22,11 @@ class Member
 		return $stmt->rowCount() ? true : false;
 	}
 
+	// 이메일 형식 체크
+	public function email_format_check($email) {
+		return filter_var($email, FILTER_VALIDATE_EMAIL);
+	}
+
 	// 이메일 중복 체크
 	public function email_exists($email)
 	{
