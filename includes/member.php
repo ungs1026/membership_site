@@ -41,13 +41,16 @@ class Member
 	// 회원정보 입력
 	public function input($marr)
 	{
+		// 단방향 암호화
+		$new_hash_password = password_hash($marr['password'], PASSWORD_DEFAULT);
+
 		$query = 'insert into member(id, name, email, password, zipcode, addr1, addr2, photo, create_at, ip) values
 						(:id, :name, :email, :password, :zipcode, :addr1, :addr2, :photo, now(), :ip)';
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':id', $marr['id']);
 		$stmt->bindParam(':name', $marr['name']);
 		$stmt->bindParam(':email', $marr['email']);
-		$stmt->bindParam(':password', $marr['password']);
+		$stmt->bindParam(':password', $new_hash_password);
 		$stmt->bindParam(':zipcode', $marr['zipcode']);
 		$stmt->bindParam(':addr1', $marr['addr1']);
 		$stmt->bindParam(':addr2', $marr['addr2']);
@@ -58,12 +61,25 @@ class Member
 
 	// 로그인
 	public function login($id, $pw) {
-		$query = "SELECT * From member where id=:id AND password=:password";
+
+		// password_verify($pw, $new_password);
+
+		$query = "SELECT password From member where id=:id";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':id', $id);
-		$stmt->bindParam(':password', $pw);
+		
 		$stmt->execute();
 
-		return $stmt->rowCount() ? true : false;
+		if ($stmt->rowCount()) {
+			$row = $stmt->fetch();
+
+			if (password_verify($pw, $row['password'])) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }
