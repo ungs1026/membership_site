@@ -2,11 +2,11 @@
 
 $server = 'localhost';
 $user = 'root';
-$pw = '';
+$password = '';
 $db = 'ytmembership';
 
 try {
-	$db = new PDO("mysql:host={$server};dbname={$db}", $user, $pw);
+	$db = new PDO("mysql:host={$server};dbname={$db}", $user, $password);
 
 	// Prepared Statement를 지원하지 않는 경우 데이터베이스의 기능을 사용하도록 해줌
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);

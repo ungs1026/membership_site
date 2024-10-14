@@ -55,4 +55,15 @@ class Member
 		$stmt->bindParam(':ip', $_SERVER['REMOTE_ADDR']);
 		$stmt->execute();
 	}
+
+	// 로그인
+	public function login($id, $pw) {
+		$query = "SELECT * From member where id=:id AND password=:password";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':id', $id);
+		$stmt->bindParam(':password', $pw);
+		$stmt->execute();
+
+		return $stmt->rowCount() ? true : false;
+	}
 }

@@ -9,7 +9,7 @@ include 'includes/part/inc_header.php';
 
 ?>
 
-<main class="w-75 mx-auto border raunded-5 p-5 d-flex gap-5 " style="height: calc(100vh - 200px);">
+<main class="w-75 mx-auto border rounded-5 p-5 d-flex gap-5 " style="height: calc(100vh - 200px);">
   <img src="sources/logo.svg" class="w-50" alt="">
   <div>
     <h3>회원 가입을 축하드립니다.</h3>
