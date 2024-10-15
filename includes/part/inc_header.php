@@ -35,10 +35,28 @@
 			</a>
 
 			<ul class="nav nav-pills">
-				<li class="nav-item"><a href="index.php" class="nav-link <?= ($menu_code == '') ? "active":'' ?>">Home</a></li>
+				<?php if(isset($ses_id) && $ses_id != '') {
+					// 로그인 상태
+				?>
+				<li class="nav-item"><a href="index.php" class="nav-link <?= ($menu_code == 'home') ? "active":'' ?>">Home</a></li>
+				<li class="nav-item"><a href="company.php" class="nav-link <?= ($menu_code == 'company') ? "active":'' ?>">회사소개</a></li>
+				<?php
+				if ($ses_level == 10) { ?>
+				<li class="nav-item"><a href="./admin/index.php" class="nav-link <?= ($menu_code == 'member') ? "active":'' ?>">Admin</a></li>
+				<?php } else { ?>
+				<li class="nav-item"><a href="mypage.php" class="nav-link <?= ($menu_code == 'member') ? "active":'' ?>">My Page</a></li>
+				<?php } ?>
+
+				<li class="nav-item"><a href="board.php" class="nav-link <?= ($menu_code == 'board') ? "active":'' ?>">게시판</a></li>
+				<li class="nav-item"><a href="./page/logout.php" class="nav-link <?= ($menu_code == 'login') ? "active":'' ?>">로그아웃</a></li>
+				<?php } else { 
+					// 로그인 안된상태
+				?>
+				<li class="nav-item"><a href="index.php" class="nav-link <?= ($menu_code == 'home') ? "active":'' ?>">Home</a></li>
 				<li class="nav-item"><a href="company.php" class="nav-link <?= ($menu_code == 'company') ? "active":'' ?>">회사소개</a></li>
 				<li class="nav-item"><a href="stipulation.php" class="nav-link <?= ($menu_code == 'member') ? "active":'' ?>">회원가입</a></li>
 				<li class="nav-item"><a href="board.php" class="nav-link <?= ($menu_code == 'board') ? "active":'' ?>">게시판</a></li>
 				<li class="nav-item"><a href="login.php" class="nav-link <?= ($menu_code == 'login') ? "active":'' ?>">로그인</a></li>
+				<?php } ?>
 			</ul>
 		</header>

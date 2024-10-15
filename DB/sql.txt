@@ -28,5 +28,19 @@ create table member (
 	unique index id(id) using btree
 );
 
+-- insert
+insert into member(id, name, email, password, zipcode, addr1, addr2, photo, create_at, login_dt, ip, level) values ();
+
 -- 테이블 조회
 show tables;
+
+-- 테이블 수정
+alter table member add column login_dt datetime after create_at;
+
+alter table member add column level tinyint unsigned DEFAULT 1;
+
+
+-- auto_increment 수정
+alter table member AUTO_INCREMENT=1;
+set @count = 0;
+UPDATE member set idx = @count:=@count+1;

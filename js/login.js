@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return false;
         } else if (data.result == 'login_success') {
           alert('로그인에 성공하였습니다.');
-          self.location.href = './member.php';
+          self.location.href = './index.php';
         }
 
       } else {
