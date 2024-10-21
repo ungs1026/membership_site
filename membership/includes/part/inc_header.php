@@ -47,7 +47,15 @@
 				<li class="nav-item"><a href="mypage.php" class="nav-link <?= ($menu_code == 'member') ? "active":'' ?>">My Page</a></li>
 				<?php } ?>
 
-				<li class="nav-item"><a href="board.php" class="nav-link <?= ($menu_code == 'board') ? "active":'' ?>">게시판</a></li>
+				<?php
+					foreach ($boardArr as $row) {
+						echo '<li class="nav-item"><a href="board.php?bcode='.$row['bcode'].'" class="nav-link';
+							if (isset($_GET['bcode']) && $_GET['bcode'] == $row['bcode']) {
+								echo ' active';
+							}
+						echo '">'.$row['name'].'</a></li>';
+					};
+				?>
 				<li class="nav-item"><a href="./page/logout.php" class="nav-link <?= ($menu_code == 'login') ? "active":'' ?>">로그아웃</a></li>
 				<?php } else { 
 					// 로그인 안된상태

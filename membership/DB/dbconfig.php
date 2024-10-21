@@ -17,3 +17,10 @@ try {
 } catch (PDOException $e) {
 	echo $e->getMessage();
 }
+
+define('DOCUMENT_ROOT'	, $_SERVER['DOCUMENT_ROOT'] .'/membership');
+define('ADMIN_DIR'			, DOCUMENT_ROOT		.'/admin');
+define('DATA_DIR'				, DOCUMENT_ROOT		.'/data');
+define('PROFILE_DIR'		, DATA_DIR 				.'/profile');
+define('BOARD_DIR'			, DATA_DIR				.'/board');
+define('BOARD_WEB_DIR'	, 'data/board');

@@ -57,7 +57,7 @@ $memArr = $mem->list($page, $limit, $paramArr);
 				<td><?= $row['email'] ?></td>
 				<td><?= $row['create_at'] ?></td>
 				<td>
-					<button class="btn btn-primary btn-sm">수정</button>
+					<button class="btn btn-primary btn-sm btn_mem_edit" data-idx="<?= $row['idx']; ?>">수정</button>
 					<button class="btn btn-danger btn-sm btn_mem_delete" data-idx="<?= $row['idx']; ?>">삭제</button>
 				</td>
 			</tr>

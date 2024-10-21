@@ -1,13 +1,17 @@
 <?php
-session_start();
-
-$ses_id = (isset($_SESSION['ses_id']) && $_SESSION['ses_id'] != '') ? $_SESSION['ses_id'] : '';
-$ses_level = (isset($_SESSION['ses_level']) && $_SESSION['ses_level'] != '') ? $_SESSION['ses_level'] : '';
+include_once './includes/part/common.php';
 
 $g_title = '네카라쿠배';
 $js_array = ['js/home.js'];
 
 $menu_code = 'home';
+
+// 게시판 목록
+include_once './DB/dbconfig.php';
+include_once './includes/board_manage.php';
+
+$boardm = new BoardManage($db);
+$boardArr = $boardm->list();
 
 include 'includes/part/inc_header.php';
 

@@ -99,6 +99,16 @@ class Member
 		die('<script>	self.location.href="../index.php";</script>');
 	}
 
+	public function getInfoFormIdx($idx)
+	{
+		$query = "select * from member where idx=:idx";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':idx', $idx);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC); // FETCH_NUM (index로만 나옴)
+		$stmt->execute();
+		return $stmt->fetch();
+	}
+
 	public function getInfo($id)
 	{
 		$query = "select * from member where id=:id";
@@ -119,7 +129,6 @@ class Member
 			':addr1' => $marr['addr1'],
 			':addr2' => $marr['addr2'],
 			':photo' => $marr['photo'],
-			':id' => $marr['id']
 		];
 		if ($marr['password'] != '') {
 			// 단방향 암호화
@@ -129,7 +138,16 @@ class Member
 			$query .= ", password=:password";
 		}
 
-		$query .= ' where id=:id';
+		if ($_SESSION['ses_level'] == 10 && isset($marr['idx']) && $marr['idx'] != ''){
+			$params[':level'] = $marr['level'];
+			$params[':idx'] = $marr['idx'];
+			$query .= ", level=:level";
+			$query .= " where idx=:idx";
+		} else {
+			$params[':id'] = $marr['id'];
+			$query .= ' where id=:id';
+		}
+
 
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute($params);
@@ -226,5 +244,20 @@ class Member
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':idx', $idx);
 		$stmt->execute();
+	}
+
+	// 프로필 이미지 업로드
+	public function profile_upload($id, $new_photo, $old_photo = '') {
+		if ($old_photo != '') {
+			unlink(PROFILE_DIR.$old_photo); // 삭제
+		}
+	
+		$tmparr = explode('.', $new_photo['name']);
+		$ext = end($tmparr); // 확장자 추출
+		$photo = $id . '.' . $ext; // 새로운 파일 명
+	
+		copy($new_photo['tmp_name'], PROFILE_DIR."/".$photo);
+	
+		return $photo;
 	}
 }

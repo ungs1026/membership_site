@@ -24,3 +24,7 @@ localhost/membership/
 * db 관리 툴
 * 브라우저
 * xampp
+
+index 사용
+장점 -> 검색 속도가 빠르다
+단점 -> insert / delete / update 속도가 느려진다, 용량 증가

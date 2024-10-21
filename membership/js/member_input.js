@@ -204,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}).open();
 	})
 
+	// 사진
 	const f_photo = document.querySelector('#f_photo');
 	f_photo.addEventListener('change', (e) => {
 		const reader = new FileReader();

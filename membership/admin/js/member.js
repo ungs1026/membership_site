@@ -8,37 +8,47 @@ document.addEventListener("DOMContentLoaded", () => {
 			return false;
 		}
 		const sn = document.querySelector('#sn');
-		self.location.href='./member.php?sn=' + sn.value + '&sf=' + sf.value;
+		self.location.href = './member.php?sn=' + sn.value + '&sf=' + sf.value;
 	})
-	
+
 	const btn_all = document.querySelector('#btn_all');
 	btn_all.addEventListener('click', () => {
-		self.location.href='./member.php';
+		self.location.href = './member.php';
 	})
 
 	// 액셀저장
 	const btn_excel = document.querySelector('#btn_excel');
 	btn_excel.addEventListener('click', () => {
-		self.location.href='./member_to_excel.php';
+		self.location.href = './member_to_excel.php';
+	});
+
+	// 수정 버튼
+	const btn_mem_edit = document.querySelectorAll(".btn_mem_edit");
+	btn_mem_edit.forEach((box) => {
+		box.addEventListener("click", () => {
+			const idx = box.dataset.idx;
+
+			self.location.href = './member_edit.php?idx=' + idx;
+		})
 	});
 
 	// 삭제 버튼
 	const btn_mem_deletes = document.querySelectorAll('.btn_mem_delete');
 	btn_mem_deletes.forEach((box) => {
 		box.addEventListener('click', () => {
-			if(confirm('본 회원을 삭제하시겠습니까?')) {
+			if (confirm('본 회원을 삭제하시겠습니까?')) {
 
 				const idx = box.dataset.idx;
 
 				const f = new FormData();
 				f.append("idx", idx);
-				
+
 				const xhr = new XMLHttpRequest();
 				xhr.open("POST", './includes/member_del.php', "true");
 				xhr.send(f);
 
 				xhr.onload = () => {
-					if(xhr.status == 200) {
+					if (xhr.status == 200) {
 						const data = JSON.parse(xhr.responseText);
 						if (data.result == 'member_del_success') {
 							self.location.reload();

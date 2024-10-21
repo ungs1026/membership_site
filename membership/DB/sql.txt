@@ -1,0 +1,89 @@
+-- 데이터베이스 생성
+create database ytmembership;
+
+-- 데이터베이스 조회
+show database;
+
+-- 데이터베이스 삭제
+drop database ytmembership;
+
+-- 데이터베이스 사용
+use ytmembership;
+
+-- member
+
+create table member (
+	idx int(11) unsigned not null auto_increment,
+	id varchar(100) default '',
+	name varchar(100) default '',
+	email varchar(100) default '',
+	password varchar(100) default '',
+	zipcode char(5) default '',
+	addr1 varchar(255) default '',
+	addr2 varchar(255) default '',
+	photo varchar(100) default '',
+	create_at datetime,
+	ip varchar(20) default '',
+	primary key(idx),
+	unique index id(id) using btree
+);
+
+-- insert
+insert into member(id, name, email, password, zipcode, addr1, addr2, photo, create_at, login_dt, ip, level) values ();
+
+-- 테이블 조회
+show tables;
+
+-- 테이블 수정
+alter table member add column login_dt datetime after create_at;
+
+alter table member add column level tinyint unsigned DEFAULT 1;
+
+
+-- auto_increment 수정
+alter table member AUTO_INCREMENT=1;
+set @count = 0;
+UPDATE member set idx = @count:=@count+1;
+
+-- board 테이블
+create table board_manage (
+	idx int unsigned not null auto_increment,
+	name varchar(255) default '' comment '게시판 이름',
+	btype enum('board', 'gallery') default 'board' comment '게시판 타입',
+	cnt integer default 0 comment '게시물 수',
+	create_at datetime,
+	primary key(idx)
+);
+
+alter table board_manage add column bcode varchar(40) default '' after name;
+
+insert into board_manage values (null, '자유게시판', 'free', 'board', 0, now());
+
+-- board
+create table board (
+	idx integer unsigned not null auto_increment,
+	bcode char(6) default '' comment '게시판 코드',
+	id varchar(50) default '' comment '아이디',
+	name varchar(50) default '' comment '이름',
+	subject varchar(255) default '' comment '제목',
+	content mediumtext comment '내용',
+	hit integer unsigned default 0 comment '조회수',
+	ip varchar(30) default '' comment '글쓴이 IP',
+	create_at datetime not null comment '글 등록 날짜',
+	primary key(idx)
+);
+
+-- index check
+show index from board;
+
+-- add column
+alter table board add column files varchar(255) default '' after content;
+
+-- add index
+alter table board add index bcode(bcode);
+alter table board add index bcode_id(bcode, id);
+
+
+-- drop index
+alter table board drop index bcode_id;
+
