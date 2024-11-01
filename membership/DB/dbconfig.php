@@ -24,3 +24,5 @@ define('DATA_DIR'				, DOCUMENT_ROOT		.'/data');
 define('PROFILE_DIR'		, DATA_DIR 				.'/profile');
 define('BOARD_DIR'			, DATA_DIR				.'/board');
 define('BOARD_WEB_DIR'	, 'data/board');
+define('POPUP_DIR'			, DATA_DIR				.'/popup');
+define('POPUP_WEB_DIR'	, 'data/popup');

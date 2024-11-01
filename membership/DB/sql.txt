@@ -73,6 +73,9 @@ create table board (
 	primary key(idx)
 );
 
+-- comment field add
+alter table board add column comment_cnt integer unsigned default 0 after hit;
+alter table board drop column comment_cnt;
 -- index check
 show index from board;
 
@@ -87,3 +90,42 @@ alter table board add index bcode_id(bcode, id);
 -- drop index
 alter table board drop index bcode_id;
 
+-- alter column
+alter table board change column files files text;
+
+-- field 
+alter table board add column downhit varchar(20) default '' after hit; 
+alter table board add column last_reader varchar(30) default '' after downhit;
+
+-- comment table
+create table comment (
+	idx integer unsigned not null auto_increment,
+	pidx integer not null,
+	id varchar(50) default '' comment '글작성자',
+	contnet text comment '댓글내용',
+	create_at datetime not null,
+	ip varchar(30),
+	primary key(idx)
+);
+
+-- 댓글 비우기
+truncate table comment;
+
+-- popup
+
+create table popups (
+	idx integer unsigned not null auto_increment,
+	name varchar(255) default '',
+	sdate date,
+	edate date,
+	pop_x integer default 0,
+	pop_y integer default 0,
+	file varchar(255) default '',
+	link varchar(255) default '',
+	cookie enum('day', 'week', 'month') default 'day',
+	useok tinyint default 1,
+	create_at datetime,
+	primary key(idx)
+);
+
+alter table popups add column link_hit integer unsigned default 0 after link;

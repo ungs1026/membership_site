@@ -38,6 +38,7 @@
 				<li class="nav-item"><a href="index.php" class="nav-link <?= ($menu_code == 'home') ? "active" : '' ?>">Home</a></li>
 				<li class="nav-item"><a href="member.php" class="nav-link <?= ($menu_code == 'member') ? "active" : '' ?>">회원관리</a></li>
 				<li class="nav-item"><a href="board.php" class="nav-link <?= ($menu_code == 'board') ? "active" : '' ?>">게시판관리</a></li>
+				<li class="nav-item"><a href="popup.php" class="nav-link <?= ($menu_code == 'popup') ? "active" : '' ?>">팝업관리</a></li>
 				<li class="nav-item"><a href="../page/logout.php" class="nav-link <?= ($menu_code == 'login') ? "active" : '' ?>">로그아웃</a></li>
 			</ul>
 		</header>
